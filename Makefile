@@ -7,4 +7,14 @@ help: ## Show this help
 .DEFAULT_GOAL := help
 
 dev:
-	uv run --env-file .env functions-framework --target=main --port=9000
+	uv run --env-file .env functions-framework --target=main --port=9001
+
+deploy:
+	gcloud functions deploy tr-webhook \
+	  --runtime python311 \
+	  --trigger-http \
+	  --entry-point main \
+	  --allow-unauthenticated \
+	  --memory 512MB \
+	  --timeout 60s \
+	  --region us-central1

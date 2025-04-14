@@ -4,7 +4,7 @@ from courier.client import Courier
 client = Courier()
 
 
-def send_markdown_message(markdown_content: str, email: str):
+def send_markdown_message(markdown_content: str, subject: str):
     """
     Send a message using a Courier template with markdown content.
 
@@ -15,8 +15,11 @@ def send_markdown_message(markdown_content: str, email: str):
         response = client.send(
             message={
                 "template": "8XBK02CCQ3MFFRQA91CZRYRRYF7K",
-                "to": {"email": email},
-                "data": {"markdown": markdown_content},
+                "to": [
+                    {"email": "bryanweber@google.com"},
+                    {"email": "marold@google.com"},
+                ],
+                "data": {"markdown": markdown_content, "subject": subject},
             }
         )
         print(f"Message sent successfully! Response: {response}")
