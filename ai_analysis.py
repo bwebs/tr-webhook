@@ -29,7 +29,7 @@ def analyze_stock_data(metadata: dict, rows: list) -> str:
             role="user",
             parts=[
                 types.Part.from_text(
-                    text=f"""Can you analyze this stock data and provide a summary with recent news or reasons for change? Write this in markdown format. I would like the markdown to aslo have links back to the sources you found. Here is the data:
+                    text=f"""Can you analyze this stock data and provide a summary with recent news or reasons for change? Write this in markdown format. I would like the markdown to also have links back to the sources you found. Here is the data:
 <metadata>
 {json.dumps(metadata, indent=2)}
 </metadata>
@@ -68,7 +68,6 @@ def analyze_stock_data(metadata: dict, rows: list) -> str:
     response_json = json.loads(response.text)
     markdown = response_json.get("markdown")
     subject = response_json.get("email_subject_line")
-    print(markdown)
     if not markdown:
         raise Exception("No markdown returned from Gemini")
     send_markdown_message(markdown, subject)

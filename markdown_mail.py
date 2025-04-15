@@ -22,7 +22,6 @@ def send_markdown_message(markdown_content: str, subject: str):
                 "data": {"markdown": markdown_content, "subject": subject},
             }
         )
-        print(f"Message sent successfully! Response: {response}")
         return response
     except Exception as e:
         print(f"Error sending message: {e}")
